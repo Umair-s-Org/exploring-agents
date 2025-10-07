@@ -5,6 +5,9 @@ pipeline {
             label 'jenkins-ubuntu-agent'
         }
     }
+    options {
+        newContainerPerStage()
+    }
     stages {
         stage('Stage-1') {
             steps {
