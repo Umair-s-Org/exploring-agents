@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            label 'jenkins-ubuntu-agent'
+            }
 
     stages {
         stage('S1 - Any Agent') {
@@ -11,7 +15,6 @@ pipeline {
         }
 
         stage('S2 - Ubuntu Agent') {
-            agent { label 'jenkins-ubuntu-agent' }
             steps {
                 sh 'cat /etc/os-release'
                 sh 'node -v'
@@ -20,13 +23,6 @@ pipeline {
         }
 
         stage('S3 - Docker Agent') {
-            agent {
-                docker {
-                    // alwaysPull true
-                    image 'node:18-alpine'
-                    label 'jenkins-ubuntu-agent'
-                }
-            }
             steps {
                 sh 'cat /etc/os-release'
                 sh 'node -v'
@@ -34,13 +30,6 @@ pipeline {
             }
         }
         stage('S4 - Docker File Agent') {
-            agent {
-                dockerfile {
-                    // alwaysPull true
-                    filename 'Dockerfile'
-                    label 'jenkins-ubuntu-agent'
-                }
-            }
             steps {
                 sh 'node -v'
                 sh 'npm -v'
