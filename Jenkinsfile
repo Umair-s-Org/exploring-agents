@@ -4,6 +4,7 @@ pipeline {
             filename 'Dockerfile'
             label 'jenkins-ubuntu-agent'
             }
+        }
 
     stages {
         stage('S1 - Any Agent') {
