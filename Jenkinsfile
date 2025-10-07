@@ -1,40 +1,39 @@
 pipeline {
     agent {
-        dockerfile {
+        dockerfile { 
             filename 'Dockerfile'
             label 'jenkins-ubuntu-agent'
-            }
         }
-
+    }
     stages {
-        stage('S1') {
+        stage('Stage-1') {
             steps {
-                sh 'cat /etc/os-release'
-                sh 'node -v'
-                sh 'npm -v'
+                echo "Generating a random file"
+                sh 'echo $((RANDOM)) > /tmp/imp-file-$BUILD_ID'
+                sh 'ls -l /tmp/imp-file-$BUILD_ID'
+                sh 'cat /tmp/imp-file-$BUILD_ID'
             }
         }
-
-        stage('S2') {
+        stage('Stage-2') {
             steps {
-                sh 'cat /etc/os-release'
-                sh 'node -v'
-                sh 'npm -v'
+                echo "Reading the same file in Stage-2"
+                sh 'ls -l /tmp/imp-file-$BUILD_ID'
+                sh 'cat /tmp/imp-file-$BUILD_ID'
             }
         }
-
-        stage('S3') {
+        stage('Stage-3') {
             steps {
-                sh 'cat /etc/os-release'
-                sh 'node -v'
-                sh 'npm -v'
+                echo "Verifying file in Stage-3"
+                sh 'cat /tmp/imp-file-$BUILD_ID'
             }
         }
-        stage('S4') {
+        stage('Stage-4') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
-                sh 'cowsay -f dragon This is running on docker container'
+                echo "Inspecting before exit"
+                sh 'ls -l /tmp/imp-file-$BUILD_ID'
+                sh 'cat /tmp/imp-file-$BUILD_ID'
+                echo "Sleeping to keep container alive"
+                sh 'sleep 120s'
             }
         }
     }
