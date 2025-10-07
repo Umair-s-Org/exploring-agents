@@ -35,9 +35,9 @@ pipeline {
         }
         stage('S4 - Docker File Agent') {
             agent {
-                docker {
+                dockerfile {
                     // alwaysPull true
-                    image 'node:18-alpine'
+                    filename 'Dockerfile'
                     label 'jenkins-ubuntu-agent'
                 }
             }
