@@ -7,7 +7,7 @@ pipeline {
         }
 
     stages {
-        stage('S1 - Any Agent') {
+        stage('S1') {
             steps {
                 sh 'cat /etc/os-release'
                 sh 'node -v'
@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('S2 - Ubuntu Agent') {
+        stage('S2') {
             steps {
                 sh 'cat /etc/os-release'
                 sh 'node -v'
@@ -23,14 +23,14 @@ pipeline {
             }
         }
 
-        stage('S3 - Docker Agent') {
+        stage('S3') {
             steps {
                 sh 'cat /etc/os-release'
                 sh 'node -v'
                 sh 'npm -v'
             }
         }
-        stage('S4 - Docker File Agent') {
+        stage('S4') {
             steps {
                 sh 'node -v'
                 sh 'npm -v'
